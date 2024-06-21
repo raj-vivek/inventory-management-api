@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JwtServiceImpl  implements JwtService {
+public class JwtServiceImpl implements JwtService {
 
     @Value("${ladyshopee.app.jwtSecret}")
     private String jwtSigningKey; //base64EncodedSecretKey

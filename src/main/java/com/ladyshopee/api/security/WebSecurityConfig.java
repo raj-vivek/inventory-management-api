@@ -4,6 +4,7 @@ import com.ladyshopee.api.security.filter.JwtAuthenticationFilter;
 import com.ladyshopee.api.security.jwt.AuthEntryPointJwt;
 import com.ladyshopee.api.service.MongoAuthUserDetailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,8 +32,11 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    @Value("${ladyshopee.app.corsUrl}")
+    private String corsURL;
+
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final MongoAuthUserDetailService mongoAuthUserDetailService;
     private AuthEntryPointJwt unauthorizedHandler;
 
@@ -63,7 +67,7 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+        configuration.setAllowedOrigins(Arrays.asList(corsURL));
         configuration.setAllowedMethods(Arrays.asList("GET","POST"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
 

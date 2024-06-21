@@ -19,5 +19,5 @@ public class JwtAuthenticationResponse implements Response{
     private String firstName;
     private String lastName;
     private String email;
-    private Set<String> roles = new HashSet<>();
+    private Set<String> roles;
 }
